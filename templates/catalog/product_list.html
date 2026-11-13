@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}Каталог — FASHION STORE{% endblock %}
+
+{% block content %}
+<section class="catalog-page section">
+    <div class="container">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">FASHION STORE</p>
+                <h1>Каталог товарів</h1>
+            </div>
+
+            <p class="catalog-count">
+                Знайдено товарів: {{ page_obj.paginator.count }}
+            </p>
+        </div>
+
+        <form method="get" class="catalog-filters">
+            <input
+                type="search"
+                name="q"
+                value="{{ search_query }}"
+                placeholder="Пошук товарів..."
+                aria-label="Пошук товарів"
+            >
+
+            <select name="category">
+                <option value="">Усі категорії</option>
+
+                {% for category in categories %}
+                    <option
+                        value="{{ category.slug }}"
+                        {% if selected_category == category.slug %}
+                            selected
+                        {% endif %}
+                    >
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <select name="sort">
+                <option value="newest"
+                    {% if selected_sort == "newest" %}selected{% endif %}>
+                    Спочатку нові
+                </option>
+
+                <option value="price_asc"
+                    {% if selected_sort == "price_asc" %}selected{% endif %}>
+                    Ціна: від дешевих
+                </option>
+
+                <option value="price_desc"
+                    {% if selected_sort == "price_desc" %}selected{% endif %}>
+                    Ціна: від дорогих
+                </option>
+
+                <option value="popular"
+                    {% if selected_sort == "popular" %}selected{% endif %}>
+                    Популярні
+                </option>
+            </select>
+
+            <button class="primary-button filter-button" type="submit">
+                Застосувати
+            </button>
+        </form>
+
+        {% if products %}
+            <div class="product-grid">
+                {% for product in products %}
+                    <article class="product-card">
+                        <a href="{{ product.get_absolute_url }}">
+                            <div class="product-image">
+                                {% if product.image %}
+                                    <img
+                                        src="{{ product.image.url }}"
+                                        alt="{{ product.name }}"
+                                    >
+                                {% else %}
+                                    <span>Немає зображення</span>
+                                {% endif %}
+
+                                {% if product.is_new %}
+                                    <span class="product-badge">Новинка</span>
+                                {% endif %}
+                            </div>
+                        </a>
+
+                        <div class="product-info">
+                            <p class="product-brand">
+                                {{ product.brand.name }}
+                            </p>
+
+                            <h2>
+                                <a href="{{ product.get_absolute_url }}">
+                                    {{ product.name }}
+                                </a>
+                            </h2>
+
+                            <div class="product-price">
+                                <strong>{{ product.price }} грн</strong>
+
+                                {% if product.has_discount %}
+                                    <del>{{ product.old_price }} грн</del>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <h2>Товарів не знайдено</h2>
+                <p>Спробуйте змінити параметри пошуку.</p>
+            </div>
+        {% endif %}
+
+        {% if is_paginated %}
+            <nav class="pagination" aria-label="Пагінація">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">
+                        ← Назад
+                    </a>
+                {% endif %}
+
+                <span>
+                    Сторінка {{ page_obj.number }}
+                    з {{ page_obj.paginator.num_pages }}
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">
+                        Далі →
+                    </a>
+                {% endif %}
+            </nav>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

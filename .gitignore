@@ -1,0 +1,39 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Local databases
+db.sqlite3
+db.sqlite3-journal
+*.sqlite3
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Tests
+.pytest_cache/
+.coverage
+htmlcov/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Generated files
+staticfiles/
