@@ -1,0 +1,16 @@
+FASHION STORE — застосування виправлень
+
+1. Відкрий папку C:\Users\didoc\Documents\fashion_store у VS Code.
+2. Скопіюй README.md і fix_fashion_store.py у корінь проєкту (поряд із manage.py).
+3. Відкрий PowerShell у цій папці й активуй .venv, якщо вона ще не активована.
+4. Запусти: python fix_fashion_store.py
+5. Перевір: python manage.py check
+6. Запусти: python manage.py test -v 2
+7. Запусти локальний сайт і перевір шапку та футер у браузері.
+8. Перевір git status та git diff, щоб не було .env, db.sqlite3 або паролів у Git.
+9. За успішної перевірки: git add README.md templates/base.html
+10. git commit -m "Document project and remove inactive controls"
+11. git push origin main
+
+Скрипт перед зміною templates/base.html створює резервну копію templates/base.html.bak.
+Не коміть .bak, .env та локальну базу.

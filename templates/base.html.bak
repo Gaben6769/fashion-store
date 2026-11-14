@@ -1,0 +1,123 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}FASHION STORE{% endblock %}
+    </title>
+
+    <meta
+        name="description"
+        content="FASHION STORE — сучасний одяг, взуття та аксесуари"
+    >
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="logo" href="{% url 'home' %}">
+                FASHION<span>STORE</span>
+            </a>
+
+            <nav class="main-navigation" aria-label="Головна навігація">
+                <a href="{% url 'home' %}">Головна</a>
+                <a href="{% url 'catalog:product_list' %}">Каталог</a>
+                <a href="{% url 'catalog:product_list' %}?category=cholovichyi-odiah">
+                    Чоловікам
+                </a>
+                <a href="{% url 'catalog:product_list' %}?category=zhinochyi-odiah">
+                    Жінкам
+                </a>
+                <a href="{% url 'catalog:product_list' %}?category=vzuttia">
+                    Взуття
+                </a>
+                <a href="#">Аксесуари</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="icon-button" type="button" aria-label="Пошук">
+                    <span>⌕</span>
+                </button>
+
+                <a class="icon-button" href="#" aria-label="Обране">
+                    <span>♡</span>
+                </a>
+
+                <a class="icon-button cart-button" href="#" aria-label="Кошик">
+                    <span>🛒</span>
+                    <small>0</small>
+                </a>
+
+            {% if user.is_authenticated %}
+                <form
+                   method="post"
+                   action="{% url 'accounts:logout' %}"
+                   class="logout-form"
+             > 
+                 {% csrf_token %}
+                 <button class="profile-link logout-button" type="submit">
+                 Вийти
+                  </button>
+                 </form>
+                 {% else %}
+                <a class="profile-link" href="{% url 'accounts:login' %}">
+                 Увійти
+            </a>
+            {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <a class="logo logo-footer" href="{% url 'home' %}">
+                    FASHION<span>STORE</span>
+                </a>
+
+                <p>
+                    Стиль, якість і комфорт<br>
+                    у кожній деталі.
+                </p>
+            </div>
+
+            <div>
+                <h3>Магазин</h3>
+                <a href="#">Новинки</a>
+                <a href="#">Одяг</a>
+                <a href="#">Взуття</a>
+                <a href="#">Аксесуари</a>
+            </div>
+
+            <div>
+                <h3>Інформація</h3>
+                <a href="#">Про магазин</a>
+                <a href="#">Доставка та оплата</a>
+                <a href="#">Повернення</a>
+                <a href="#">Контакти</a>
+            </div>
+
+            <div>
+                <h3>Зв'язатися з нами</h3>
+                <p>Пн–Пт: 09:00–18:00</p>
+                <p>+380 97 147 07 45</p>
+                <p>iaremchuk.d.i_kn24@rcit.ukr.education</p>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <p>© 2026 FASHION STORE. Усі права захищено.</p>
+            <p>Інтернет-магазин одягу та взуття</p>
+        </div>
+    </footer>
+</body>
+</html>

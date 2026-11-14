@@ -36,22 +36,9 @@
                 <a href="{% url 'catalog:product_list' %}?category=vzuttia">
                     Взуття
                 </a>
-                <a href="#">Аксесуари</a>
             </nav>
 
             <div class="header-actions">
-                <button class="icon-button" type="button" aria-label="Пошук">
-                    <span>⌕</span>
-                </button>
-
-                <a class="icon-button" href="#" aria-label="Обране">
-                    <span>♡</span>
-                </a>
-
-                <a class="icon-button cart-button" href="#" aria-label="Кошик">
-                    <span>🛒</span>
-                    <small>0</small>
-                </a>
 
             {% if user.is_authenticated %}
                 <form
@@ -92,18 +79,18 @@
 
             <div>
                 <h3>Магазин</h3>
-                <a href="#">Новинки</a>
-                <a href="#">Одяг</a>
-                <a href="#">Взуття</a>
-                <a href="#">Аксесуари</a>
+                <p>Одяг, взуття та аксесуари</p>
+                
+                
+                
             </div>
 
             <div>
                 <h3>Інформація</h3>
-                <a href="#">Про магазин</a>
-                <a href="#">Доставка та оплата</a>
-                <a href="#">Повернення</a>
-                <a href="#">Контакти</a>
+                <p>Навчальний демонстраційний проєкт</p>
+                
+                
+                
             </div>
 
             <div>
